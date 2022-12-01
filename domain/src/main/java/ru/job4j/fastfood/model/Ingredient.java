@@ -1,4 +1,4 @@
-package fastfood.model;
+package ru.job4j.fastfood.model;
 
 import lombok.Data;
 
