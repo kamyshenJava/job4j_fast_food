@@ -1,4 +1,4 @@
-package src.main.java.ru.job4j.fastfood.service;
+package ru.job4j.fastfood.service;
 
 import ru.job4j.fastfood.model.Dish;
 
