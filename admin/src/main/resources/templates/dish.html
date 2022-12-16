@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DISHES</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" >
+</head>
+<body>
+<div class="container">
+    <div class="row mt-5">
+        <div class="card text-center mx-auto w-75">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${dish.name}"></h5>
+                <p class="card-text" th:text="${dish.ingredients}">Created</p>
+                <form method="post">
+                    <input type="hidden" name="id" th:value="${dish.id}">
+                    <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
+                        <a th:href="@{/dish/}" class="btn btn-primary" role="button">Back to dishes</a>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editDish">Edit</button>
+                        <button type="submit" th:formaction="@{/dish/remove}" class="btn btn-primary">Remove</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editDish" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mx-auto" id="staticBackdropLabel">Edit the dish</h5>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/dish/edit}" method="POST" id="edit" th:object="${newDish}">
+                    <input type="hidden" name="id" th:value="${dish.id}">
+                    <div class="mb-3">
+                        <input type="text" maxlength="100" class="form-control form-control-lg" name="name"
+                               th:value="${dish.name}" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="ingredients" class="form-label">Ingredients</label>
+                        <textarea class="form-control" id="ingredients" rows="3" name="ingredients"
+                                  th:text="${dish.ingredients}"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" form="edit">Save</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>

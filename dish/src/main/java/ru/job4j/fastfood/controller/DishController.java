@@ -9,7 +9,7 @@ import ru.job4j.fastfood.service.DishService;
 import java.util.List;
 
 @RestController
-@RequestMapping(name = "/dish")
+@RequestMapping(value = "/dish")
 public class DishController {
 
     private final DishService dishService;
@@ -19,9 +19,8 @@ public class DishController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<?> addDish(@RequestBody Dish dish) {
-        boolean status = dishService.addDish(dish);
-        return ResponseEntity.status(status ? HttpStatus.OK : HttpStatus.NOT_FOUND).build();
+    public Dish addDish(@RequestBody Dish dish) {
+        return dishService.addDish(dish);
     }
 
     @PutMapping("/{id}")

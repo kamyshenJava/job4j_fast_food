@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 public class DishService {
-    @Value("${api-url}")
+    @Value("${api-dish-url}")
     private String url;
     private final RestTemplate restTemplate;
 
@@ -23,7 +23,7 @@ public class DishService {
     }
 
     public boolean addDish(Dish dish) {
-        return restTemplate.postForEntity(url, dish, Void.class).getStatusCode() != HttpStatus.NOT_FOUND;
+        return restTemplate.postForEntity(url, dish, Dish.class).getStatusCode() != HttpStatus.NOT_FOUND;
     }
 
     public boolean editDish(String id, Dish dish) {
