@@ -46,7 +46,7 @@ public class DishServiceImp implements DishService {
 
     @Override
     public Dish findById(int id) {
-        return dishRepository.findById(id).orElse(null);
+        return dishRepository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 
     @Override

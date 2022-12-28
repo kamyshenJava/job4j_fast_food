@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MainDish {
+public class MainNotification {
     public static void main(String[] args) {
-        SpringApplication.run(MainDish.class, args);
+        SpringApplication.run(MainNotification.class, args);
     }
 }
