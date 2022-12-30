@@ -11,10 +11,10 @@ import java.util.Optional;
 @Service
 public class OrderServiceImp implements OrderService {
 
-    private final KafkaTemplate<Integer, String> kafkaTemplate;
+    private final KafkaTemplate<Integer, Order> kafkaTemplate;
     private final OrderRepository orderRepository;
 
-    public OrderServiceImp(KafkaTemplate<Integer, String> kafkaTemplate, OrderRepository orderRepository) {
+    public OrderServiceImp(KafkaTemplate<Integer, Order> kafkaTemplate, OrderRepository orderRepository) {
         this.kafkaTemplate = kafkaTemplate;
         this.orderRepository = orderRepository;
     }
@@ -22,8 +22,7 @@ public class OrderServiceImp implements OrderService {
     @Override
     public Order placeOrder(Order order) {
         Order orderDb = orderRepository.save(order);
-        kafkaTemplate.send("messengers", orderDb.getId(),
-                String.format("Order %d has been placed", orderDb.getId()));
+        kafkaTemplate.send("messengers", orderDb.getId(), orderDb);
         return orderDb;
     }
 
