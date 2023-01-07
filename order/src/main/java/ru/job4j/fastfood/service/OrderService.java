@@ -6,8 +6,8 @@ import ru.job4j.fastfood.model.OrderStatus;
 
 public interface OrderService {
     Order placeOrder(Order order);
+    Order updateStatus(Order order);
     boolean changeOrder(int id, Order order);
     boolean cancelOrder(int id);
     OrderStatus getStatus(int id);
-    Order findById(int id);
 }

@@ -1,8 +1,5 @@
 package ru.job4j.fastfood.service;
 
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.aspectj.weaver.ast.Or;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import ru.job4j.fastfood.model.Order;
@@ -30,9 +27,8 @@ public class OrderServiceImp implements OrderService {
         return orderDb;
     }
 
-    @KafkaListener(topics = {"cooked_order"})
-    public Order updateStatus(ConsumerRecord<Integer, Order> input) {
-        Order order = input.value();
+    @Override
+    public Order updateStatus(Order order) {
         orderRepository.save(order);
         return order;
     }
@@ -65,10 +61,5 @@ public class OrderServiceImp implements OrderService {
     public OrderStatus getStatus(int id) {
         Optional<Order> orderOptional = orderRepository.findById(id);
         return orderOptional.map(Order::getOrderStatus).orElseThrow(IllegalArgumentException::new);
-    }
-
-    @Override
-    public Order findById(int id) {
-        return orderRepository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 }
